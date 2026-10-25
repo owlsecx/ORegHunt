@@ -18,16 +18,18 @@
 
 ## 📌 Overview
 
-Offline Windows registry hive forensic parser & auditor
+ORegHunt is an offline forensic parser and auditor for Windows registry hives. Using a pure-standard-library regf parser, it walks the key tree, extracts forensic artifacts and runs MITRE-mapped audit rules over read-only hive files. It reports metadata only — it never extracts password hashes or decrypts LSA secrets.
 
 ---
 
 ## ✨ Features
 
-- Pure-stdlib regf/hbin/nk/vk/sk/lf/lh/li/ri/db parser
-- Artifacts: autoruns, services, Winlogon, IFEO, AppInit, LSA, USB, network, software, UserAssist, ShimCache, ShellBags, RecentDocs, TypedURLs, RDP, SAM metadata, LSA secrets presence, misc persistence
-- MITRE audit rules, FILETIME timeline, TXT/MD/JSON/CSV/SARIF
-- Interactive menu, full CLI, --demo synthetic self-test
+- Pure-stdlib regf/hbin parser for raw hive files
+- Key-tree printing, single-key dumps and value inspection
+- Artifact extractors (autoruns, services, USB, UserAssist, ShimCache, ShellBags and more)
+- MITRE-mapped forensic audit with FILETIME timeline and date filtering
+- Deleted-cell scanning and hive header/cell information
+- TXT/MD/JSON/CSV/SARIF export with severity filtering and a synthetic self-test
 
 ---
 
@@ -41,7 +43,10 @@ Offline Windows registry hive forensic parser & auditor
 ## 🚀 Usage
 
 ```bash
-./ORegHunt
+./ORegHunt --hive SYSTEM --audit
+./ORegHunt --hive NTUSER.DAT --tree --values
+./ORegHunt --hive SOFTWARE --artifact autoruns -f json -o out.json
+./ORegHunt --help
 ```
 
 ---
